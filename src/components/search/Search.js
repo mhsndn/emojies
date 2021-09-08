@@ -2,6 +2,7 @@ import React,{Fragment, useEffect,useState} from 'react';
 import axios from 'axios';
 
 import List from './../list/List'
+import Input from './../input/Input';
 import './search.css';
 
 const Search =()=>{
@@ -15,26 +16,25 @@ const Search =()=>{
     };
    
     useEffect(() => {
-       
-            const timeId=setTimeout(()=>{
-                if(searchWord){
-                    handelLoadEmojies();
-                }else{
-                    setResult([])
-                }
+        const timeId=setTimeout(()=>{
+            if(searchWord){
+                handelLoadEmojies();
+            }else{
+                setResult([])
+            }
             },500);
 
-            return ()=>{
-                clearTimeout(timeId);
-            };     
-   
+        return ()=>{
+            clearTimeout(timeId);
+        };     
+
     },[searchWord]);
 
-    const handelinput=(e)=>{
+    const handelInput=(e)=>{
         setSearchWord(e.target.value);
     };
 
-        const finalresult=result.map(item => {
+        const finalResult=result.map(item => {
            if(item.keywords.includes(searchWord)){
               return <List key={item.title} title={item.title}  symbol={item.symbol} />
        } 
@@ -44,9 +44,13 @@ const Search =()=>{
      <Fragment>
         <div className='box'>
             <form>
-                <input type="text"  name="search" placeholder="Search emoji eg:mask,water ..."  value={searchWord} onChange={handelinput}  />
+                <Input  
+                    placeholder="Search emoji eg:mask,water ..."
+                    value={searchWord}
+                    onChange={handelInput}
+                   />
             </form>
-            {finalresult}
+            {finalResult}
         </div>
      </Fragment>
           );

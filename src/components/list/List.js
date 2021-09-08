@@ -14,7 +14,6 @@ const List =(props)=>{
                     <td></td>
                 </tr> 
                 </tbody>
-
         </table>
     </Fragment>
     );
